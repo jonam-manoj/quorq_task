@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Questions</h1>
+{% for question in questions %}
+    <div class="question">
+        <h2>{{ question.question_text }}</h2>
+        <p>Posted by: {{ question.user.username }}</p>
+        <p>Posted on: {{ question.created_at }}</p>
+    </div>
+{% empty %}
+    <p>No questions available.</p>
+{% endfor %}
+{% endblock %}

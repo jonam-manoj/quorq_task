@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Question: {{ question.question_text }}</h1>
+<p>Posted by: {{ question.user.username }}</p>
+<p>Posted on: {{ question.created_at }}</p>
+<h2>Answers</h2>
+{% for answer in question.answer_set.all %}
+    <div class="answer">
+        <p>{{ answer.answer_text }}</p>
+        <p>Posted by: {{ answer.user.username }}</p>
+        <p>Posted on: {{ answer.created_at }}</p>
+    </div>
+{% empty %}
+    <p>No answers available.</p>
+{% endfor %}
+<h2>Answer the Question</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Answer</button>
+</form>
+{% endblock %}
